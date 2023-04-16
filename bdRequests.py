@@ -1,31 +1,38 @@
+import json
+
 import psycopg2
+from pprint import pprint
+
+factors = [""]
 
 
 class BDController:
     def _start(self):
-        self.conn = psycopg2.connect(database="***", user="***", password="***", host="***",
-                                     port="***")
-        self.cur = self.conn.cursor()
-        self.AllData = 'public."AllData"'
+        self.file_name = "./stat.json"
+        self.file = open(self.file_name, "r")
 
     def __init__(self):
         pass
 
     def getAll(self):
         self._start()
-        self.cur.execute(f'SELECT * FROM {self.AllData}')
-        rows = self.cur.fetchall()
-        self.close()
+        rows = json.loads(self.file.read())
+        pprint(rows)
+        self._close()
+
         return rows
 
     def setData(self, data: dict):
-        self._start()
-        self.cur.execute(
-            f"INSERT INTO {self.AllData} (id, start_time, duration, name, url, data_size)"
-            f" VALUES (data[id], data[start_time], data[duration], data[name], data[url], data[data_size])")
-        self.conn.commit()
-        self.close()
+        with open(self.file_name, "r") as f:
+            base = json.loads(f.read())
+        base.update(data)
+        with open(self.file_name, "w") as f:
+            f.write(json.dumps(base))
         return
 
-    def close(self):
-        self.conn.close()
+    def _close(self):
+        self.file.close()
+
+
+bd = BDController()
+bd.getAll()
