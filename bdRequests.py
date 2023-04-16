@@ -1,26 +1,23 @@
 import json
 
-import psycopg2
 from pprint import pprint
 
 factors = [""]
 
 
 class BDController:
+    file_name = "./stat.json"
     def _start(self):
-        self.file_name = "./stat.json"
         self.file = open(self.file_name, "r")
 
     def __init__(self):
         pass
 
     def getAll(self):
-        self._start()
-        rows = json.loads(self.file.read())
-        pprint(rows)
-        self._close()
+        with open(self.file_name, "r") as f:
+            base = json.loads(f.read())
 
-        return rows
+        return base
 
     def setData(self, data: dict):
         with open(self.file_name, "r") as f:

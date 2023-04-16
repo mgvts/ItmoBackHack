@@ -19,12 +19,12 @@ def get_data():
 @app.route('/addData', methods=['POST'])
 def post_data():
     print("here")
-    print(request.json)
+    print(request.json())
 
     return "123"
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="164.92.210.100")
 # print(parseData([[1, 1111111, 99, "Hi", "hi/hello", 123], [2, 123123, 8989, "hihi", "/hi/men/hi", None],
 #                  [3, 97989, 892828, "ioio", "/ioi/www/www/oo", 9]]))
