@@ -1,6 +1,5 @@
 import json
 
-import psycopg2
 from pprint import pprint
 
 factors = [""]
@@ -20,16 +19,11 @@ class BDController:
             base = json.loads(f.read())
 
         return base
-        self._start()
-        rows = json.loads(self.file.read())
-        pprint(rows)
-        self._close()
-        return rows
 
     def setData(self, data: dict):
         with open(self.file_name, "r") as f:
             base = json.loads(f.read())
-        base.update(data)
+        base.append(data)
         with open(self.file_name, "w") as f:
             f.write(json.dumps(base))
         return

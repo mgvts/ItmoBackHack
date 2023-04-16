@@ -11,31 +11,31 @@ def parseData(d: [[]]) -> {"": [{}]}:
 
 
 @app.route('/start_time', methods=["GET"])
-def get_data():
+def get_data1():
     return parseData(base.getAll()["start_time"])
 
 
 @app.route('/data_size', methods=["GET"])
-def get_data():
+def get_data2():
     return parseData(base.getAll()["data_size"])
 
 
 @app.route('/data_per_time', methods=["GET"])
-def get_data():
+def get_data3():
     return parseData(base.getAll()["data_per_time"])
 
 
 @app.route('/duration', methods=["GET"])
-def get_data():
+def get_data4():
     return parseData(base.getAll()["duration"])
 
 
 # todo
 @app.route('/addData', methods=['POST'])
 def post_data():
-    base.setData(request.json)
     print("here")
-    print(request.json())
+    print(request.form.to_dict())
+    base.setData(request.form.to_dict())
 
     return "123"
 
