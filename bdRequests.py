@@ -19,7 +19,6 @@ class BDController:
         rows = json.loads(self.file.read())
         pprint(rows)
         self._close()
-
         return rows
 
     def setData(self, data: dict):
