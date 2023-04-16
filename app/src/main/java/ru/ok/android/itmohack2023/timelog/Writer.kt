@@ -26,6 +26,13 @@ class Writer {
                 .add("url", data.url.toString())
                 .add("data_size", data.data_size.toString())
                 .build()
+        println("formbody          ${FormBody.Builder()
+            .add("id", data.id.toString())
+            .add("start_time", data.start_time.toString())
+            .add("duration", data.duration.toString())
+            .add("name", data.name.toString())
+            .add("url", data.url.toString())
+            .add("data_size", data.data_size.toString())}")
 
 
         val request = Request.Builder()
